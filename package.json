@@ -1,0 +1,25 @@
+{
+    "devDependencies": {
+        "@symfony/webpack-encore": "^0.17.1",
+        "babel-cli": "^6.26.0",
+        "babel-preset-react": "^6.24.1",
+        "webpack": "^3.11.0"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production"
+    },
+    "dependencies": {
+        "babel": "^6.23.0",
+        "babel-loader": "^7.1.2",
+        "jquery": "^3.3.1",
+        "react": "^16.2.0",
+        "react-dom": "^16.2.0",
+        "webpack-dev-server": "^2.11.1",
+        "webpack-notifier": "^1.5.1"
+    }
+}
