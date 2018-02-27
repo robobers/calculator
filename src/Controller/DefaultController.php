@@ -45,44 +45,57 @@ class DefaultController extends AbstractController
 
 
   /**
-       * @Route("/share/{token}", name="share", requirements={"token"=".+"})
-       */
-      public function share($token)
-      {
-         $this->logger->info("token: $token");
-
-         return new Response("res : $token");
-
-      }
-
-
-
-  /**
   * @Route("/eval/{value}", name="eval", requirements={"value"=".+"})
   **/
   public function eval($value){
 
      $result = "";
      try {
-       $this->logger->info("Given Value: $value");
-       $parser = new StdMathParser();
-       $AST = $parser->parse($value);
-       $evaluator = new Evaluator();
-       $result = $AST->accept($evaluator);
-       $this->logger->info("Result Value: $result");
+
+       $this->writeLog($value,"debug");
+       $result = $this->mathParser($value);
+       $this->writeLog($result,"info");
 
      }
      catch(\Exception  $ex){
         $log =$ex->getMessage();
         $result = "Error";
-        $this->logger->error("Result Value:  $log");
+        $this->writeLog($log,"error");
 
      }
      return $this->render('default/postacion.html.twig', [
        'result' => $result,
     ]);
 
-       //return new Response("Result : $result");
+  }
+
+  private function writeLog($val, $type){
+       switch ($type) {
+         case 'debug':
+           $this->logger->info("Given Value: $val");
+           break;
+         case 'info':
+           $this->logger->info("Result: $val");
+           break;
+         case 'error':
+           $this->logger->error("Error: $val");
+           break;
+         default:
+            $this->logger->critical("Critical something went Wrong: $val");
+           break;
+       }
+
+  }
+
+
+  private function mathParser($value){
+
+    $parser = new StdMathParser();
+    $AST = $parser->parse($value);
+    $evaluator = new Evaluator();
+    $result = $AST->accept($evaluator);
+    return $result;
+
   }
 
 

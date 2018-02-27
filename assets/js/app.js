@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom'
 
 
 class MyForm extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
     this.state = {
       value: ""
 
@@ -22,11 +22,8 @@ class MyForm extends React.Component {
   }
 
   handleSubmit(event) {
-    //alert('calculate: ' + this.state.value);
     console.log(this.state.value);
     event.preventDefault();
-    //this.context.router.replaceWith('/home');
-
     window.location = 'http://localhost:8000/eval/'+this.state.value;
 
   }
