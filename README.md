@@ -11,7 +11,8 @@ Node.js and npm: https://nodejs.org/en/
 #build
 composer install
 npm install
-
+npm update
+npm run watch
 
 #run
 php bin/console server:start
