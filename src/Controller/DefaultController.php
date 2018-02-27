@@ -21,13 +21,14 @@ class DefaultController extends AbstractController
 
   private $logger;
 
+  //initilize logger in constructor
   public function __construct(LoggerInterface $logger)
   {
       $this->logger = $logger;
   }
 
 
-
+  //default route
   /**
   * @Route("/")
   **/
@@ -36,6 +37,7 @@ class DefaultController extends AbstractController
     return new Response('Index');
   }
 
+  //calculator index
   /**
   * @Route("/calculate")
   **/
@@ -43,7 +45,8 @@ class DefaultController extends AbstractController
     return $this->render('default/action.html.twig');
   }
 
-
+  //calculator post, calculates given value
+  //logs the input and also the output also for errors at ~/var/log/dev.log
   /**
   * @Route("/eval/{value}", name="eval", requirements={"value"=".+"})
   **/
@@ -69,6 +72,7 @@ class DefaultController extends AbstractController
 
   }
 
+ //logs the value with logtype
   private function writeLog($val, $type){
        switch ($type) {
          case 'debug':
@@ -87,7 +91,7 @@ class DefaultController extends AbstractController
 
   }
 
-
+  //parse and evaluates expression
   private function mathParser($value){
 
     $parser = new StdMathParser();
